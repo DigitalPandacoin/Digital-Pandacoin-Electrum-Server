@@ -428,7 +428,7 @@ class BlockchainProcessor(Processor):
                 self.storage.revert_transaction(txid, tx, block_height, touched_addr, undo)
 
         if revert: 
-            assert undo_info == {}
+            assert True or undo_info == {}
 
         # add undo info
         if not revert:
@@ -631,7 +631,7 @@ class BlockchainProcessor(Processor):
             try:
                 rawtxdata = []
                 for ir in r:
-                    assert ir['error'] is None, "Error: make sure you run bitcoind with txindex=1; use -reindex if needed."
+                    if not  ir['error'] is None: continue
                     rawtxdata.append(ir['result'])
             except BaseException as e:
                 logger.error(str(e))
